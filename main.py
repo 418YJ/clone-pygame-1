@@ -76,11 +76,15 @@ k=0
 GO = 0
 kill = 0
 loss = 0
+background_Sound = pygame.mixer.Sound("sound/enchanted tiki 86.mp3")
+kill_Sound = pygame.mixer.Sound("sound/pain75_1.wav")
+
+background_Sound.play()
 
 #4-0. 게임 시작 대기 화면
 SB=0
 while SB == 0:
-    clock.tick(60)  
+    clock.tick(60)
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             SB=1
@@ -92,6 +96,8 @@ while SB == 0:
     font = pygame.font.Font("font/AjwolahSsnvB7x4vKXxBgx-uvwc.ttf", 35)
     text = font.render("PRESS SPACE KEY TO START", True, (255,255,255)) #true 는 anti-aliasing을 의미/이미지화된 텍스트
     screen.blit(text, (40, round(size[1]/2-50)))
+
+
     pygame.display.flip()
 
 
@@ -181,6 +187,7 @@ while SB==0:
             m = m_list[i]
             a = a_list[j]
             if crash(m,a) == True:
+                kill_Sound.play()
                 dm_list.append(i)
                 da_list.append(j)
     dm_list = list(set(dm_list)) #set은 dm리스트의 중복을 제거하고 집합자료형으로 만들어줌 따라서 list로 감싸 자료형 변환
