@@ -174,8 +174,9 @@ while SB==0:
         a.y += a.move
         if a.y >= size[1]:
             d_list.append(i)
+    d_list.reverse()
     for d in d_list:
-        del m_list[d]
+        del a_list[d]
         loss += 1
 
 
@@ -187,17 +188,28 @@ while SB==0:
             m = m_list[i]
             a = a_list[j]
             if crash(m,a) == True:
-                kill_Sound.play()
                 dm_list.append(i)
                 da_list.append(j)
+                kill_Sound.play()
     dm_list = list(set(dm_list)) #set은 dm리스트의 중복을 제거하고 집합자료형으로 만들어줌 따라서 list로 감싸 자료형 변환
     da_list = list(set(da_list))
-    
-    for dm in dm_list:
-        del m_list[dm]
-    for da in da_list:
-        del a_list[da]
-        kill += 1
+    dm_list.reverse()
+    da_list.reverse()
+    try:
+        for dm in dm_list:
+            del m_list[dm]
+        for da in da_list:
+            del a_list[da]
+            kill += 1
+    except:
+        pass
+
+
+    #for dm in dm_list:
+    #   del m_list[dm]
+    #for da in da_list:
+    #    del a_list[da]
+    #    kill += 1
 
     #외계인과 우주선이 만나면 게임종료
     for i in range(len(a_list)):
